@@ -1,0 +1,52 @@
+# trigger:
+# - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  subscription: Azure subscription 1
+  resourceGroup: resourcegroup-tfstate
+  storageAccount: terraformtfstateskip
+  container: tfstate
+  tfstateFile: terraform.tfstate
+  anyTfChanges: false
+
+steps:
+
+- task: TerraformInstaller@0
+  displayName: install Terraform v0.12.28
+  inputs:
+    terraformVersion: '0.12.28'
+
+- task: TerraformTaskV1@0
+  displayName: terraform init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/modules/storage'
+    backendServiceArm: '$(subscription)'
+    backendAzureRmResourceGroupName: '$(resourceGroup)'
+    backendAzureRmStorageAccountName: '$(storageAccount)'
+    backendAzureRmContainerName: '$(container)'
+    backendAzureRmKey: '$(tfstateFile)'
+
+- task: TerraformTaskV1@0
+  displayName: terraform plan -out=tfplan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
+    commandOptions: '-out=tfplan'
+    # commandOptions: '-detailed-exitcode -out=tfplan'
+    environmentServiceNameAzureRM: '$(subscription)'
+
+
+- task: TerraformTaskV1@0
+  displayName: terraform apply tfplan
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
+    commandOptions: 'tfplan'
+    environmentServiceNameAzureRM: '$(subscription)'
