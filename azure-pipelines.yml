@@ -5,11 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  subscription: Azure subscription 1 (564aa9d4-9031-49bc-9320-124b01c9d64c)
-  resourceGroup: resourcegroup-tfstate
-  storageAccount: terraformtfstateskip
-  container: tfstate
-  tfstateFile: terraform.tfstate
+ 
   anyTfChanges: false
 
 steps:
@@ -20,34 +16,13 @@ steps:
   inputs:
     terraformVersion: 'v1.1.5'
 
-- task: TerraformTaskV1@0
-  displayName: terraform init
+- task: TerraformTaskV2@2
   inputs:
     provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/modules/storage'
-    backendServiceArm: '$(subscription)'
-    backendAzureRmResourceGroupName: '$(resourceGroup)'
-    backendAzureRmStorageAccountName: '$(storageAccount)'
-    backendAzureRmContainerName: '$(container)'
+    backendServiceArm: 'cnx'
+    backendAzureRmResourceGroupName: 'iotstorage'
+    backendAzureRmStorageAccountName: 'edgepfe'
+    backendAzureRmContainerName: 'edgeblob'
     backendAzureRmKey: '$(tfstateFile)'
-
-- task: TerraformTaskV1@0
-  displayName: terraform plan -out=tfplan
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/modules/storage'
-    commandOptions: '-out=tfplan'
-    # commandOptions: '-detailed-exitcode -out=tfplan'
-    environmentServiceNameAzureRM: '$(subscription)'
-
-
-- task: TerraformTaskV1@0
-  displayName: terraform apply tfplan
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/modules/storage'
-    commandOptions: 'tfplan'
-    environmentServiceNameAzureRM: '$(subscription)'
