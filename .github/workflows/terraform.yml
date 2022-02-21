@@ -23,11 +23,7 @@ jobs:
         shell: bash
  
     steps:
-  
 
-
-   
-   
    
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
