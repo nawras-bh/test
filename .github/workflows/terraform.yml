@@ -7,7 +7,9 @@ on:
   pull_request:
  
 jobs:
-  terraform:
+
+
+   terraform:
     name: 'Terraform'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
