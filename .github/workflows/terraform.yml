@@ -27,8 +27,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
+   
    
    
     - name: 'Terraform Init'
@@ -37,6 +36,8 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./terraform"
+    - name: 'Terraform Format'
+      uses: hashicorp/terraform-github-actions@master
  
     - name: 'Terraform Validate'
       uses: hashicorp/terraform-github-actions@master
