@@ -1,6 +1,6 @@
 
 resource "azurerm_resource_group" "iotstorage" {
-  name = var.rgname
+  name     = var.rgname
   location = var.location
 }
 resource "azurerm_storage_account" "edgepfe" {

@@ -1,6 +1,6 @@
 # Project variables
 variable "location" {
-  type = string
+  type        = string
   description = "The location for the deployment"
 }
 
@@ -11,6 +11,6 @@ variable "rgname" {
 
 
 variable "saname" {
-  type = string
+  type        = string
   description = "Storage Account name"
 }
