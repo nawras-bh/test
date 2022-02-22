@@ -14,7 +14,7 @@ func TestTerraformAzureResourceGroupExample(t *testing.T) {
 
 	subscriptionID := ""
 	terraformOptions := &terraform.Options{
-		TerraformDir: "../storage",
+		TerraformDir: "../modules/storage",
 		Vars: map[string]interface{}{
 
 		},
