@@ -50,7 +50,7 @@ jobs:
 
     - name: Terraform Apply
       id: apply
-      if: needs.plan.outputs.planExitcode == 2
+      if: plan.outputs.planExitcode == 2
       run: terraform apply -auto-approve
 
 
