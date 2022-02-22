@@ -40,11 +40,23 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-    - name: Terraform Plan
+    
+    - name: Terraform Plan 
       id: plan
-      run: terraform plan -no-color
+      run: terraform plan -detailed-exitcode -input=false -out=plan.out
       continue-on-error: true
+
+    - name: Check for Plan Failure
+      if: steps.plan.outputs.exitcode == 1
+      run: exit 1
+
+   
+
+    - name: Terraform Apply
+      id: apply
   
- 
+      if: needs.plan.outputs.planExitcode == 2
+      run: terraform apply -auto-approve
+
 
                 
