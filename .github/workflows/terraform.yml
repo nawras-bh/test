@@ -56,6 +56,7 @@ jobs:
         tf_actions_working_dir: "."
 
     - name: Terraform Apply
+      if: steps.tf_plan.outputs.tf_actions_plan_has_changes == 'true'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
