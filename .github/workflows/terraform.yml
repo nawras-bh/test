@@ -59,7 +59,7 @@ jobs:
       run: exit 1
 
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main'
+      if: needs.plan.outputs.planExitcode == 2
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
