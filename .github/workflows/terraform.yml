@@ -57,7 +57,7 @@ jobs:
     - name: Check for Plan Failure
       if: steps.plan.outputs.exitcode == 1
       run: exit 1
-
+    
     - name: Terraform Apply
       if: needs.plan.outputs.planExitcode == 2
       uses: hashicorp/terraform-github-actions@master
