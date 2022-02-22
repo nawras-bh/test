@@ -24,7 +24,7 @@ jobs:
 
            
         working-directory: test
-        run: go test -v -tags=unit
+        run: go test -v 
      
 
 
