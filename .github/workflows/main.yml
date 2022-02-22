@@ -19,7 +19,10 @@ jobs:
       - name: Download Go Modules
         working-directory: test
         run: go mod download
-
+      - name: Azure Login
+        uses: azure/login@v1.4.0
+        with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Run Go Tests
         working-directory: test
         run: go test -v -tags=unit
