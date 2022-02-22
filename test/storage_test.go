@@ -38,4 +38,4 @@ func TestTerraformAzureResourceGroupExample(t *testing.T) {
 	exists2 := azure.StorageBlobContainerExists(t, StorageBlobContainerName,storageAccountName,resourceGroupName, subscriptionID)
 	assert.True(t, exists2, "storage account  does not exist")
 }
-}
+
