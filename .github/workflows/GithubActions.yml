@@ -51,6 +51,7 @@ jobs:
         working-directory: test
         run: go test -v 
         
+        
  terraform:
     needs:  go-tests
     name: 'Terraform'
