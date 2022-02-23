@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'TerraformGithubActions'
 
 on:
   push:
@@ -18,6 +18,7 @@ jobs:
         
  go-tests:
     name: Run Go Unit Tests
+    needs:  runSH
     env:
            ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
            ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
