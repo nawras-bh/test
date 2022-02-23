@@ -19,7 +19,10 @@ jobs:
       - name: Download Go Modules
         working-directory: test
         run: go mod download
-     
+        
+      - name: Run  remote backend script 
+        run: sh ./remote.sh
+        
       - name: Login via Az module
         uses: azure/login@v1
         with:
