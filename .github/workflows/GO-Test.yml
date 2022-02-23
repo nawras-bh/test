@@ -15,7 +15,8 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: 1.13
-
+      - name: Run  remote backend script 
+        run: sh ./remote.sh
       - name: Download Go Modules
         working-directory: test
         run: go mod download
