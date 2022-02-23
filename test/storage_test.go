@@ -12,7 +12,7 @@ import (
 func TestTerraformAzureResourceGroupExample(t *testing.T) {
 	t.Parallel()
 
-	subscriptionID := "564aa9d4-9031-49bc-9320-124b01c9d64c"
+	subscriptionID := ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../",
 		Vars: map[string]interface{}{
