@@ -7,6 +7,15 @@ on:
   pull_request:
 
 jobs:
+ runSH:
+    name: Run remote backend script
+           
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run  remote backend script 
+        run: sh ./remote.sh
+        
  go-tests:
     name: Run Go Unit Tests
     env:
