@@ -1,8 +1,8 @@
 module "storage" {
   source   = "./modules/storage"
   location = "eastus"
-  rgname   = "iotstorage"
-  saname   = "edgepfe"
+  rgname   = "iotstorage1"
+  saname   = "edgepfe1"
 
 }
 
