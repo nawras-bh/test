@@ -1,6 +1,6 @@
 #!/bin/bash
 #Connect and set Subscription Context in Azure
-az login
+az login --service-principal -u 59b8cb25-2ee5-4122-ad33-7214807b7081 -p 8HfrLiUlF6qW8Ak1kWe9m~wk0Y9Pozd-0b --tenant b3ad2679-9a3b-41ed-a05b-03cfd9a4d4b6
 
 
 
