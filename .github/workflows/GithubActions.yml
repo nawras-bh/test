@@ -3,7 +3,7 @@ name: 'TerraformGithubActions'
 on:
   push:
     branches:
-    - 'features/nawras-create-storage'
+    - 'main'
   pull_request:
 
 jobs:
