@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run  remote backend script 
         run: sh ./remote.sh
-docker-for-terratestr:
+ docker-for-terratestr:
     needs: runSH
     runs-on: ubuntu-latest
     container:
