@@ -64,7 +64,6 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-
     - name: Terraform Plan
       id: plan
       run: terraform plan -detailed-exitcode -input=false -out=plan.out
