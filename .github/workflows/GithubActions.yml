@@ -3,64 +3,75 @@ name: 'TerraformGithubActions'
 on:
   push:
     branches:
-    - main
+    - 'features/nawras-create-storage'
   pull_request:
 
 jobs:
+
  runSH:
     name: Run remote backend script
-        
-        
+          
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: Run  remote backend script 
         run: sh ./remote.sh
-        
- go-tests:
-    name: Run Go Unit Tests
-    needs:  runSH
-    env:
-           ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID_N}}
-           ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-           ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-           
-           
+  docker-for-terratestr:
+    needs: runSH
     runs-on: ubuntu-latest
+    container:
+      image: nawrasbelhoula/containerterra:1.0
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME_N }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD_N }}
+  
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-go@v1
-        with:
-          go-version: 1.13
+      - uses: actions/checkout@v2
+      - name: run in container
+        run: sh ./docker-tests.sh 
+####################### terratest without docker """"""""""""""""""""""""""
+ #go-tests:
+#   name: Run Go Unit Tests
+#    needs:  runSH
+ #   env:
+ #          ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID_N}}
+  #         ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET_N}}
+   #        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID_N}}
+    #       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID_N}}
+           
+    #runs-on: ubuntu-latest
+    #steps:
+     # - uses: actions/checkout@v1
+      #- uses: actions/setup-go@v1
+       # with:
+        #  go-version: 1.13
     
-      - name: Download Go Modules
-        working-directory: test
-        run: go mod download
+      #- name: Download Go Modules
+       # working-directory: test
+        #run: go mod download
         
     
-        
-      - name: Login via Az module
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true 
+  
+      #- name: Login via Az module
+       # uses: azure/login@v1
+        #with:
+         # creds: ${{secrets.AZURE_CREDENTIALS_N}}
+          #enable-AzPSSession: true 
 
-      - name: Run Go Tests
+      #- name: Run Go Tests
 
            
-        working-directory: test
-        run: go test -v 
-        
-        
+       # working-directory: test
+        #run: go test -v 
+########################################################      
  terraform:
-    needs:  go-tests
+    needs:  docker-for-terratestr
     name: 'Terraform'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID_N}}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET_N}}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID_N}}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID_N}}
     runs-on: ubuntu-latest
     environment: production
 

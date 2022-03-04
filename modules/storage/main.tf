@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "edgepfe" {
   account_replication_type = "LRS"
 }
 resource "azurerm_storage_container" "edgeblob" {
-  name                  = "edgeblob"
+  name                  = var.containername
   storage_account_name  = azurerm_storage_account.edgepfe.name
   container_access_type = "private"
 }
