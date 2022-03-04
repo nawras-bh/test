@@ -29,41 +29,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: run in container
         run: sh ./docker-tests.sh 
-####################### terratest without docker """"""""""""""""""""""""""
- #go-tests:
-#   name: Run Go Unit Tests
-#    needs:  runSH
- #   env:
- #          ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID_N}}
-  #         ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET_N}}
-   #        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID_N}}
-    #       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID_N}}
-           
-    #runs-on: ubuntu-latest
-    #steps:
-     # - uses: actions/checkout@v1
-      #- uses: actions/setup-go@v1
-       # with:
-        #  go-version: 1.13
-    
-      #- name: Download Go Modules
-       # working-directory: test
-        #run: go mod download
-        
-    
-  
-      #- name: Login via Az module
-       # uses: azure/login@v1
-        #with:
-         # creds: ${{secrets.AZURE_CREDENTIALS_N}}
-          #enable-AzPSSession: true 
-
-      #- name: Run Go Tests
-
-           
-       # working-directory: test
-        #run: go test -v 
-########################################################      
+   
  terraform:
     needs:  docker-for-terratestr
     name: 'Terraform'
