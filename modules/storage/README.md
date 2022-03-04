@@ -29,7 +29,6 @@ Run this command executes the actions proposed in a Terraform plan :
 ```
  terraform apply 
 ```
-
 ## Remote backend
 
 allows Terraform to store the state file in a remote location  for that we need to separate the Terraform State file off into a centralised location such as an Azure Storage account
