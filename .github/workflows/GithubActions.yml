@@ -22,9 +22,9 @@ jobs:
     container:
       image: nawrasbelhoula/containerterra:1.0
       credentials:
-       username: ${{secrets.DOCKERHUB_USERNAME_N}}
-       password: ${{secrets.DOCKERHUB_PASSWORD_N}}
-  
+       username: ${{ secrets.DOCKERHUB_USERNAME_N}}
+       password: ${{ secrets.DOCKERHUB_PASSWORD_N}}
+                  
     steps:
       - uses: actions/checkout@v2
       - name: run in container
@@ -73,7 +73,7 @@ jobs:
       id: apply
       if: steps.plan.outputs.exitcode == 2
       run: terraform apply -auto-approve
-
+ 
 
 
 
