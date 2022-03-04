@@ -68,7 +68,6 @@ jobs:
       id: plan
       run: terraform plan -detailed-exitcode -input=false -out=plan.out
       continue-on-error: true
-
     - name: Terraform Apply
       id: apply
       if: steps.plan.outputs.exitcode == 2
