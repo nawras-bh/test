@@ -7,16 +7,15 @@ The benefit with running the test  through docker is that we  don't need to worr
 ## Prerequisites
 
 
--Docker
+> Docker
 
--An Azure subscription
+> An Azure subscription
 
--A service principal
+> A service principal
 
--An azure storage account for tracking terraform remote backend state.
+> An azure storage account for tracking terraform remote backend state.
 
--git
-
+> git
 
 
  
