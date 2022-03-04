@@ -3,7 +3,7 @@ name: 'TerraformGithubActions'
 on:
   push:
     branches:
-    - main
+    - 'features/nawras-create-storage'
   pull_request:
 
 jobs:
@@ -98,7 +98,7 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-
+  
 
     - name: Terraform Plan
       id: plan
